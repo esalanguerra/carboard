@@ -3,6 +3,7 @@ import cors from "cors";
 import compression from "compression";
 import helmet from "helmet";
 import bodyParser from "body-parser";
+import rateLimit from "express-rate-limit";
 import { UsersRouter } from "../infra/routes/user-routes";
 
 export class Server {
@@ -15,6 +16,15 @@ export class Server {
   }
 
   public async start() {
+    const limiter = rateLimit({
+      windowMs: 15 * 60 * 1000,
+      max: 100,
+      message:
+        "Too many requests from this IP, please try again after 15 minutes.",
+    });
+
+    this.app.use(limiter);
+
     this.app.use(compression());
     this.app.use(
       helmet({
