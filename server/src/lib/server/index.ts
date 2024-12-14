@@ -37,7 +37,10 @@ export class Server {
     this.app.use(helmet.noSniff());
     this.app.use(helmet.frameguard({ action: "deny" }));
     this.app.use(helmet.referrerPolicy({ policy: "strict-origin" }));
-    
+
+    this.app.use(helmet.hsts({ maxAge: 31536000, includeSubDomains: true }));
+    this.app.use(helmet.dnsPrefetchControl({ allow: false }));
+
     this.app.use(
       cors({
         origin: "*",
@@ -56,6 +59,13 @@ export class Server {
     this.app.use(morgan("combined"));
 
     this.app.use("/v1/users", this.usersRouter.registerRoutes());
+
+    this.app.use((req, res, next) => {
+      res.setTimeout(5000, () => {
+        res.status(408).send("Request Timeout");
+      });
+      next();
+    });
 
     this.app.listen(process.env.APP_PORT || 3333, async () => {
       console.log(
