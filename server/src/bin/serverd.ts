@@ -1,8 +1,4 @@
-class Server {
-  start() {
-    console.log("ok");
-  }
-}
+import { Server } from "@/lib/server";
 
 const server = new Server();
 
