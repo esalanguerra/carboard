@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "build": "tsc --project tsconfig.json && tsc-alias -p tsconfig.json",
-    "db:studio": "bunx prisma studio"
+    "db:studio": "bunx prisma studio",
+    "check-types": "tsc --noEmit --pretty"
   },
   "devDependencies": {
     "@prisma/studio": "^0.503.0",
