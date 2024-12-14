@@ -2,6 +2,8 @@
   "name": "@carboard/server",
   "version": "1.0.0",
   "private": true,
+  "module": "index.ts",
+  "type": "commonjs",
   "scripts": {
     "build": "tsc --project tsconfig.json && tsc-alias -p tsconfig.json",
     "db:studio": "bunx prisma studio",
