@@ -13,8 +13,11 @@ export class Server {
   }
 
   public async start() {
-    this.app.use("/v1/users", this.usersRouter.registerRoutes());
+    this.app.use(express.urlencoded({ extended: true }));
+    this.app.use(express.json());
     
+    this.app.use("/v1/users", this.usersRouter.registerRoutes());
+
     this.app.listen(process.env.APP_PORT || 3333, async () => {
       console.log(
         `Main server has ben started on port *${process.env.APP_PORT}`
