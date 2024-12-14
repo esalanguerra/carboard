@@ -1,0 +1,12 @@
+{
+  "name": "@carboard/server",
+  "version": "1.0.0",
+  "private": true,
+  "devDependencies": {
+    "@prisma/studio": "^0.503.0",
+    "prisma": "^6.0.1"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.0.1"
+  }
+}
