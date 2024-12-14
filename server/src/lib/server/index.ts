@@ -1,5 +1,6 @@
 import express from "express";
-import {UsersRouter} from "../infra/routes/user-routes";
+import cors from "cors";
+import { UsersRouter } from "../infra/routes/user-routes";
 
 export class Server {
   public readonly app: express.Application;
@@ -13,9 +14,15 @@ export class Server {
   }
 
   public async start() {
+    this.app.use(
+      cors({
+        exposedHeaders: ["x-total-count", "Content-Type", "Content-Length"],
+      })
+    );
+
     this.app.use(express.urlencoded({ extended: true }));
     this.app.use(express.json());
-    
+
     this.app.use("/v1/users", this.usersRouter.registerRoutes());
 
     this.app.listen(process.env.APP_PORT || 3333, async () => {

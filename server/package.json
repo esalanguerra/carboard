@@ -12,6 +12,7 @@
   },
   "devDependencies": {
     "@prisma/studio": "^0.503.0",
+    "@types/cors": "^2.8.17",
     "@types/express": "^5.0.0",
     "@types/jest": "^29.5.14",
     "@types/node": "^22.10.2",
@@ -24,6 +25,7 @@
   },
   "dependencies": {
     "@prisma/client": "^6.0.1",
+    "cors": "^2.8.5",
     "express": "^4.21.2",
     "tsx": "^4.19.2"
   },
