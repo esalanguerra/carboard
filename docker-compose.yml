@@ -1,0 +1,17 @@
+volumes:
+  database_data:
+    driver: local
+
+services:
+  database:
+    image: postgres:15
+    restart: no
+    container_name: database
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    volumes:
+      - database_data:/var/lib/postgresql/data
