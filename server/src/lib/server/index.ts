@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import compression from "compression";
 import helmet from "helmet";
+import bodyParser from "body-parser";
 import { UsersRouter } from "../infra/routes/user-routes";
 
 export class Server {
@@ -34,6 +35,9 @@ export class Server {
         exposedHeaders: ["x-total-count", "Content-Type", "Content-Length"],
       })
     );
+
+    this.app.use(bodyParser.urlencoded({ extended: true }));
+    this.app.use(bodyParser.json());
 
     this.app.use(express.urlencoded({ extended: true }));
     this.app.use(express.json());
