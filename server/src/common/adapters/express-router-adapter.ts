@@ -16,7 +16,7 @@ export const adaptRoute = (controller: Controller) => {
         //@ts-ignore
         user: request.user,
         //@ts-ignore
-        file: request.file || request.body.file,
+        //file: request.file || request.body.file,
         platform: request.headers["platform"],
       };
 
