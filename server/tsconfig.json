@@ -1,0 +1,38 @@
+{
+  "include": [
+    "src/**/*.ts",
+  ],
+  "exclude": [
+    "node_modules/",
+    "dist/",
+    "src/**/*.spec.ts"
+  ],
+  "compilerOptions": {
+    "types": [
+      "@types/jest"
+    ],
+    "target": "es2020",
+    "module": "commonjs",
+    "lib": [
+      "es6"
+    ],
+    "allowJs": true,
+    "outDir": "./dist",
+    "baseUrl": "./",
+    "rootDir": "./",
+    "jsx": "react-jsx",
+    "removeComments": true,
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ],
+    },
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "moduleResolution": "node"
+  }
+}
