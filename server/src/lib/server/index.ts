@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import compression from "compression";
+import helmet from "helmet";
 import { UsersRouter } from "../infra/routes/user-routes";
 
 export class Server {
@@ -16,7 +17,9 @@ export class Server {
 
   public async start() {
     this.app.use(compression());
-    
+
+    this.app.use(helmet());
+
     this.app.use(
       cors({
         exposedHeaders: ["x-total-count", "Content-Type", "Content-Length"],
