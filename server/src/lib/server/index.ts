@@ -4,6 +4,7 @@ import compression from "compression";
 import helmet from "helmet";
 import bodyParser from "body-parser";
 import rateLimit from "express-rate-limit";
+import morgan from "morgan";
 import { UsersRouter } from "../infra/routes/user-routes";
 
 export class Server {
@@ -36,7 +37,7 @@ export class Server {
     this.app.use(helmet.noSniff());
     this.app.use(helmet.frameguard({ action: "deny" }));
     this.app.use(helmet.referrerPolicy({ policy: "strict-origin" }));
-
+    
     this.app.use(
       cors({
         origin: "*",
@@ -51,6 +52,8 @@ export class Server {
 
     this.app.use(express.urlencoded({ extended: true }));
     this.app.use(express.json());
+
+    this.app.use(morgan("combined"));
 
     this.app.use("/v1/users", this.usersRouter.registerRoutes());
 
