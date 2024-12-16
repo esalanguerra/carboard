@@ -6,9 +6,10 @@ import { TemplateMessagesModule } from './template-messages/template-messages.mo
 import { MessagesModule } from './messages/messages.module';
 import { CustomersModule } from './customers/customers.module';
 import { ConfigModule } from '@nestjs/config';
+import { CarsModule } from './cars/cars.module';
 
 @Module({
-  imports: [ConfigModule.forRoot(), UsersModule, TemplateMessagesModule, MessagesModule, CustomersModule],
+  imports: [ConfigModule.forRoot(), UsersModule, TemplateMessagesModule, MessagesModule, CustomersModule, CarsModule],
   controllers: [AppController],
   providers: [AppService],
 })
