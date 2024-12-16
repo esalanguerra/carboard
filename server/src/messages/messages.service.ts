@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { CreateMessageDto } from './dto/create-message.dto';
 import { UpdateMessageDto } from './dto/update-message.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { MESSAGE_STATUS } from '@prisma/client';
 
 @Injectable()
 export class MessagesService {
@@ -34,5 +35,27 @@ export class MessagesService {
     return await this.prismaService.sendMessages.delete({
       where: { id },
     });
+  }
+
+  async count(customerId: string, status?: MESSAGE_STATUS, date?: string, whatsapp_phone?: string) {
+    return await this.prismaService.sendMessages.count({
+      where: {
+        customer_id: customerId,
+        status: status,
+        whatsapp_number: '+' + whatsapp_phone,
+        createdAt: new Date(date),
+      }
+    })
+  }
+
+  async countByFilters(customerId?: string, status?: MESSAGE_STATUS, date?: string, whatsapp_phone?: string) {
+    return await this.prismaService.sendMessages.count({
+      where: {
+        customer_id: "e1ae5994-2b51-4b56-878d-c27a6fb131f6",
+        // status: status,
+        // createdAt: new Date(date),
+        // whatsapp_number: whatsapp_phone,
+      },
+    })
   }
 }
