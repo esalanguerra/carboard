@@ -19,16 +19,16 @@ export class TemplateMessagesController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.templateMessagesService.findOne(+id);
+    return this.templateMessagesService.findOne(id);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateTemplateMessageDto: UpdateTemplateMessageDto) {
-    return this.templateMessagesService.update(+id, updateTemplateMessageDto);
+    return this.templateMessagesService.update(id, updateTemplateMessageDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.templateMessagesService.remove(+id);
+    return this.templateMessagesService.remove(id);
   }
 }
