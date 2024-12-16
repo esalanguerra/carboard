@@ -23,16 +23,6 @@ export class MessagesController {
     return this.messagesService.findOne(id);
   }
 
-  @Get('count')
-  countByFilters(
-    @Query('customerId') customerId: string,
-    @Query('status') status: MESSAGE_STATUS,
-    @Query('date') date: string,
-    @Query('whatsapp') whatsapp_phone: string,
-  ) {
-    return this.messagesService.countByFilters();
-  }
-
   @Get('count/:customerId?')
   count(
     @Param('customerId') customerId: string,
