@@ -49,6 +49,19 @@ export default function Page(): JSX.Element {
           >
             Entrar
           </Button>
+
+          <div className="flex items-center justify-center my-4">
+            <div className="h-px w-full bg-gray-300" />
+            <span className="px-2 text-sm text-gray-500">ou</span>
+            <div className="h-px w-full bg-gray-300" />
+          </div>
+
+          <Button
+            type="button"
+            className="w-full bg-red-600 hover:bg-red-700 text-white"
+          >
+            Entrar com Google
+          </Button>
         </form>
 
         <div className="mt-4 text-center text-sm text-gray-600">
@@ -57,5 +70,5 @@ export default function Page(): JSX.Element {
         </div>
       </div>
     </div>
-  )
+  );
 }
