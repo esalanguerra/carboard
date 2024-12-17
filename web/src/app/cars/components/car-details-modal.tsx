@@ -1,5 +1,3 @@
-"use client";
-
 import {
   Dialog,
   DialogContent,
@@ -139,7 +137,9 @@ export default function CarDetailsModal({
               <p>{car.seller}</p>
             </div>
             <Button
-              onClick={() => (window.location.href = `tel:${car.contact}`)}
+              onClick={() => {
+                window.location.href = `/messages/whatsapp/manual/${car.contact}`;
+              }}
             >
               Whatsapp do vendedor
             </Button>
