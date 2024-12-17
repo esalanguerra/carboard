@@ -4,11 +4,11 @@ export const legalItems = [
   {
     title: 'Termos de Uso',
     icon: FileText,
-    href: '/termos-de-uso'
+    href: '/terms'
   },
   {
     title: 'Política de Privacidade',
     icon: Shield,
-    href: '/politica-de-privacidade'
+    href: '/policy'
   }
 ];
