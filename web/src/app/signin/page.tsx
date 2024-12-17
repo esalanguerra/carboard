@@ -1,10 +1,47 @@
+"use client";
+
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Logo from "@/src/components/logo";
-import { JSX } from "react";
+import { JSX, useState } from "react";
+import { auth } from "@/lib/firebase";
+import {
+  signInWithEmailAndPassword,
+  GoogleAuthProvider,
+  signInWithPopup,
+} from "firebase/auth";
 
 export default function Page(): JSX.Element {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError("");
+
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      window.location.href = "/dashboard";
+    } catch (error: any) {
+      setError("Erro ao fazer login. Verifique suas credenciais.");
+    }
+  };
+
+  const handleGoogleSignIn = async () => {
+    const provider = new GoogleAuthProvider();
+
+    try {
+      await signInWithPopup(auth, provider);
+      window.location.href = "/dashboard";
+    } catch (error: any) {
+      setError("Erro ao fazer login com Google. Tente novamente.");
+    }
+  };
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="w-full max-w-md space-y-8 bg-white rounded-lg shadow-lg p-8">
@@ -17,7 +54,7 @@ export default function Page(): JSX.Element {
             Sistema inteligente de gestão de carros
           </p>
         </div>
-        <form className="mt-8 space-y-6">
+        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <div className="space-y-4">
             <div>
               <Label
@@ -32,6 +69,8 @@ export default function Page(): JSX.Element {
                 type="email"
                 autoComplete="email"
                 required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 className="w-full border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
@@ -48,10 +87,13 @@ export default function Page(): JSX.Element {
                 type="password"
                 autoComplete="current-password"
                 required
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 className="w-full border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
           </div>
+          {error && <p className="text-red-500 text-sm">{error}</p>}
           <Button
             type="submit"
             className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-md shadow-md transition duration-200 transform hover:scale-105"
@@ -65,6 +107,7 @@ export default function Page(): JSX.Element {
           </div>
           <Button
             type="button"
+            onClick={handleGoogleSignIn}
             className="w-full bg-red-600 hover:bg-red-700 text-white font-semibold rounded-md shadow-md transition duration-200 transform hover:scale-105"
           >
             Entrar com Google
