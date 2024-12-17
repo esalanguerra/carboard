@@ -4,7 +4,7 @@ export const serverRequest = async (method, url, data) => {
     try {
         const response = await axios({
             method,
-            url: `${process.env.NEXT_APP_SERVER_URL}${url}`,
+            url: `${process.env.NEXT_PUBLIC_SERVER_URL}${url}`,
             data,
         });
         return response.data;
@@ -17,7 +17,7 @@ export const apiRequest = async (method, url, data) => {
     try {
         const response = await axios({
             method,
-            url: `${process.env.NEXT_APP_API_URL}${url}`,
+            url: `${process.env.NEXT_PUBLIC_API_URL}${url}`,
             data,
         });
         return response.data;
