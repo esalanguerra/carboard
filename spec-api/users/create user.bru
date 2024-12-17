@@ -1,0 +1,18 @@
+meta {
+  name: create user
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{host}}/users
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "sub_firebase": "qp9ADqLIAQYuvg9fVBmjf1Embe23",
+    "full_name":"rodrigo roger"
+  }
+}
