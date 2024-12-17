@@ -1,12 +1,23 @@
 import axios from "axios";
 
-const BASE_URL = "http://localhost:3333";
+export const serverRequest = async (method, url, data) => {
+    try {
+        const response = await axios({
+            method,
+            url: `${process.env.NEXT_APP_SERVER_URL}${url}`,
+            data,
+        });
+        return response.data;
+    } catch (error) {
+        return error.response.data;
+    }
+}
 
 export const apiRequest = async (method, url, data) => {
     try {
         const response = await axios({
             method,
-            url: `${BASE_URL}${url}`,
+            url: `${process.env.NEXT_APP_API_URL}${url}`,
             data,
         });
         return response.data;
