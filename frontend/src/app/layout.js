@@ -3,6 +3,7 @@ import { Toaster } from 'sonner'
 import NextTopLoader from 'nextjs-toploader'
 
 import './global.css'
+import TranslationPersist from '@/components/translation-persist'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -16,6 +17,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={inter.className}>
         <div id="google_translate_element" className="goog-te-gadget google-translate-hidden" />
+        <TranslationPersist />
         <NextTopLoader showSpinner={false} />
         {children}
         <Toaster richColors />
