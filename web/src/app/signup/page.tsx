@@ -1,6 +1,7 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import Logo from '@/src/components/logo';
 import { JSX } from 'react';
 
 export default function SignupPage(): JSX.Element {
@@ -8,7 +9,7 @@ export default function SignupPage(): JSX.Element {
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="w-full max-w-md space-y-8 bg-white rounded-lg shadow-lg p-8">
         <div className="flex flex-col items-center justify-center">
-          {/* <Logo /> */}
+          <Logo />
           <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
             Crie sua conta
           </h2>
@@ -73,7 +74,7 @@ export default function SignupPage(): JSX.Element {
         </form>
 
         <div className="mt-4 text-center text-sm text-gray-600">
-          <p>Já tem uma conta? <a href="/login" className="text-blue-600 hover:underline">Faça login</a></p>
+          <p>Já tem uma conta? <a href="/signin" className="text-blue-600 hover:underline">Faça login</a></p>
           <p className="text-xs">2024 CarBoard. Todos os direitos reservados.</p>
         </div>
       </div>
