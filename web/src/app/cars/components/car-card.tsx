@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { useState, MouseEvent } from "react";
 import { Car as CarIcon, Clock } from "lucide-react";
 import type { CarInterface } from "@/src/interfaces/CarInterface";
+import CarDetailsModal from "./car-details-modal";
 
 interface CarCardProps {
   car: CarInterface;
@@ -61,6 +62,7 @@ export default function CarCard({ car }: CarCardProps) {
           </Button>
         </div>
       </CardContent>
+
       {isModalOpen && (
         <div
           id="modal-backdrop"
@@ -68,55 +70,11 @@ export default function CarCard({ car }: CarCardProps) {
           onClick={handleBackdropClick}
         >
           <div className="bg-white p-6 rounded-md w-11/12 sm:w-96 max-w-4xl max-h-[90vh] overflow-auto transition-transform transform scale-100 opacity-100 animate-modal">
-            <div className="flex flex-col sm:flex-row">
-              <div className="w-full sm:w-1/3 p-4">
-                <Image
-                  src={car.image}
-                  alt={car.name}
-                  width={300}
-                  height={200}
-                  className="w-full h-auto object-cover rounded-lg"
-                />
-              </div>
-              <div className="w-full sm:w-2/3 p-4 space-y-4">
-                <h2 className="text-2xl font-semibold mb-4 text-center sm:text-left">
-                  {car.name}
-                </h2>
-                <div className="space-y-2">
-                  <p>
-                    <strong>Vendedor:</strong> {car.seller}
-                  </p>
-                  <p>
-                    <strong>Contato:</strong> {car.contact}
-                  </p>
-                  <p>
-                    <strong>Motor:</strong> {car.engine}
-                  </p>
-                  <p>
-                    <strong>Transmissão:</strong> {car.transmission}
-                  </p>
-                  <p>
-                    <strong>Segurança:</strong> {car.safety}
-                  </p>
-                  <p>
-                    <strong>Comodidades Internas:</strong>{" "}
-                    {car.interiorComforts}
-                  </p>
-                  <p>
-                    <strong>Eletrônicos:</strong> {car.electronics}
-                  </p>
-                  <p>
-                    <strong>Informações Adicionais:</strong>{" "}
-                    {car.additionalInformation}
-                  </p>
-                </div>
-                <div className="mt-4 flex justify-end">
-                  <Button variant="outline" onClick={closeModal}>
-                    Fechar
-                  </Button>
-                </div>
-              </div>
-            </div>
+            <CarDetailsModal
+              car={car}  // Passar o carro para o modal
+              isOpen={isModalOpen}
+              onClose={closeModal}  // Passar a função de fechar o modal
+            />
           </div>
         </div>
       )}
