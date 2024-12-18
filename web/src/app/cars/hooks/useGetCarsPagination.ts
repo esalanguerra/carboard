@@ -17,7 +17,7 @@ export function useGetCarsPagination(itemsPerPage: number) {
     const fetchCars = async () => {
       setLoading(true);
       try {
-        const response = await apiRequest({ method: "GET", url: "/carros" });
+        const response = await apiRequest({ method: "GET", url: "/cars" });
 
         const mappedCars = response.map((car: CarInterfaceResponse) =>
           useGetCarsMapper(car)
