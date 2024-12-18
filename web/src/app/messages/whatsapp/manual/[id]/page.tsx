@@ -2,7 +2,7 @@
 "use client";
 
 import LayoutDefault from "@/src/components/layout/default";
-import Footer from "@/src/components/layout/footer";
+import Footer from "@/src/components/partials/footer";
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";

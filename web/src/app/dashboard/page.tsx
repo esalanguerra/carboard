@@ -5,7 +5,7 @@ import { useGetCars } from "../cars/hooks/useGetCars";
 import CarCard from "../cars/components/car-card";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import Footer from "@/src/components/layout/footer";
+import Footer from "@/src/components/partials/footer";
 
 export default function Page() {
   const { cars, error, loading } = useGetCars();

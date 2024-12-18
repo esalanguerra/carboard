@@ -2,7 +2,7 @@
 
 import { useState, useEffect, JSX } from "react";
 import LayoutDefault from "@/src/components/layout/default";
-import Footer from "@/src/components/layout/footer";
+import Footer from "@/src/components/partials/footer";
 import { Card } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
