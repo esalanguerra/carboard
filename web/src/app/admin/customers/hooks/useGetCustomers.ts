@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { serverRequest } from "@/lib/api";
+import { apiRequest } from "@/lib/api";
 import { CustomerInterface } from "@/src/interfaces/CustomerInterface";
 
 export function useGetCustomers() {
@@ -13,7 +13,7 @@ export function useGetCustomers() {
     const fetchCustomers = async () => {
       setLoading(true);
       try {
-        const response = await serverRequest({ method: "GET", url: "/customers" });
+        const response = await apiRequest({ method: "GET", url: "/customers" });
 
         setCustomers(response);
       } catch (err) {
