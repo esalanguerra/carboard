@@ -1,27 +1,9 @@
 "use client";
 
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { useEffect } from "react";
-import { useRouter } from "next/navigation";
 import LayoutDefault from "@/src/components/layout/default";
 
 export default function PoliticaDePrivacidade() {
-  const router = useRouter();
-
-  useEffect(() => {
-    if (status === "unauthenticated") {
-      router.push("/signin");
-    }
-  }, [status, router]);
-
-  if (status === "loading") {
-    return (
-      <div className="flex justify-center items-center min-h-screen">
-        Carregando...
-      </div>
-    );
-  }
-
   return (
     <LayoutDefault>
       <ScrollArea className="h-full">
