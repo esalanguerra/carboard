@@ -24,6 +24,8 @@ const carSchema = new Schema({
   others: { type: String },
   image: { type: String },
   link: { type: String },
+  createdAt: { type: Date, default: Date.now },
+  updatedAt: { type: Date, default: Date.now },
 });
 
 const Car = mongoose.model("Car", carSchema);
