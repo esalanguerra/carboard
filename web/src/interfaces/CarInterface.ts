@@ -1,49 +1,30 @@
 export interface CarInterfaceResponse {
-  nome: string;
-  ID: string;
-  placa: string;
-  vendedor: string;
-  preco: string;
-  data: string;
-  condicao: string;
-  contato: string;
-  quilometragem: string;
-  ano: string;
-  motor: string;
-  cambio: string;
-  proprietarios: string;
-  Inspecionado: string;
-  sistema_de_transmissao: string;
-  especificacoes: string;
-  seguranca: string;
-  interior_comodidades: string;
-  eletronica: string;
-  informacoes_adicionais: string;
-  outros: string;
-  imagem: string;
-}
-
-export interface CarInterface {
+  _id?: string;
+  id_car: string;
   name: string;
-  id: string;
-  licensePlate: string;
-  seller: string;
+  owner: string;
   price: string;
-  date: string;
+  status: string;
   condition: string;
-  contact: string;
   mileage: string;
   year: number;
   engine: string;
   transmission: string;
   owners: string;
   inspected: string;
-  drivetrain: string;
+  plate: string;
   specifications: string;
   safety: string;
-  interiorComforts: string;
+  interior: string;
   electronics: string;
-  additionalInformation: string;
+  additional_information: string;
   others: string;
   image: string;
+  link: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+export interface CarInterface extends CarInterfaceResponse {
+  id: string;
 }

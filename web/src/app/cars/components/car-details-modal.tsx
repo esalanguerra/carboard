@@ -52,7 +52,7 @@ export default function CarDetailsModal({
             <div className="space-y-4">
               <div className="flex justify-center items-center gap-2">
                 <Calendar className="h-6 w-6 text-gray-600" />
-                <span>{car.date}</span>
+                <span>{car.year}</span>
               </div>
               <div className="flex justify-center items-center gap-2">
                 <Gauge className="h-6 w-6 text-gray-600" />
@@ -60,11 +60,11 @@ export default function CarDetailsModal({
               </div>
               <div className="flex justify-center items-center gap-2">
                 <MapPin className="h-6 w-6 text-gray-600" />
-                <span>{car.licensePlate}</span>
+                <span>{car.plate}</span>
               </div>
               <div className="flex justify-center items-center gap-2">
                 <MessageCircle className="h-6 w-6 text-gray-600" />
-                <span>{car.contact}</span>
+                <span>{car.owner}</span>
               </div>
             </div>
           </div>
@@ -77,7 +77,7 @@ export default function CarDetailsModal({
               </div>
               <div className="flex justify-center items-center gap-2">
                 <Settings className="h-6 w-6 text-gray-600" />
-                <span>Câmbio: {car.condition}</span>
+                <span>Condição: {car.condition}</span>
               </div>
               <div className="flex justify-center items-center gap-2">
                 <Zap className="h-6 w-6 text-gray-600" />
@@ -93,16 +93,16 @@ export default function CarDetailsModal({
               </div>
               <div className="flex justify-center items-center gap-2">
                 <ListChecks className="h-6 w-6 text-gray-600" />
-                <span>Drivetrain: {car.drivetrain}</span>
+                <span>Transmissão: {car.transmission}</span>
               </div>
             </div>
           </div>
         </div>
         <div className="mt-6 text-center">
-          {car.interiorComforts && (
+          {car.interior && (
             <div className="mb-4">
               <h4 className="font-semibold text-xl mb-2">Interior e Comodidades</h4>
-              <p>{car.interiorComforts}</p>
+              <p>{car.interior}</p>
             </div>
           )}
           {car.safety && (
@@ -117,10 +117,10 @@ export default function CarDetailsModal({
               <p>{car.electronics}</p>
             </div>
           )}
-          {car.additionalInformation && (
+          {car.additional_information && (
             <div className="mb-4">
               <h4 className="font-semibold text-xl mb-2">Informações Adicionais</h4>
-              <p>{car.additionalInformation}</p>
+              <p>{car.additional_information}</p>
             </div>
           )}
           {car.others && (
@@ -134,11 +134,11 @@ export default function CarDetailsModal({
           <div className="flex justify-between items-center">
             <div>
               <h4 className="font-semibold text-lg">Vendedor</h4>
-              <p>{car.seller}</p>
+              <p>{car.owner}</p>
             </div>
             <Button
               onClick={() => {
-                window.location.href = `/messages/whatsapp/manual/${car.contact}`;
+                window.location.href = `/messages/whatsapp/manual/${car.owner}`;
               }}
               className="bg-blue-600 text-white hover:bg-blue-700 transition duration-200"
             >
