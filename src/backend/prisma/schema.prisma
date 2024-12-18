@@ -1,0 +1,83 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+enum MESSAGE_STATUS {
+  SENT
+  NOT_SENT
+  PENDING
+  VIEWED
+  CANCELED
+}
+
+enum USER_STATUS {
+  ACTIVE
+  DISABLED
+}
+
+model User {
+  id                String             @id @default(auto()) @map("_id") @db.ObjectId
+  sub_firebase      String             @unique
+  full_name         String
+  vat               String             @unique
+  phone_number      String
+  send_messages     SendMessages[]
+  template_messages TemplateMessages[]
+  status            USER_STATUS        @default(ACTIVE)
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
+}
+
+model SendMessages {
+  id              String         @id @default(auto()) @map("_id") @db.ObjectId
+  message_text    String
+  whatsapp_number String
+  status          MESSAGE_STATUS @default(PENDING)
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+  user            User?          @relation(fields: [user_id], references: [id])
+  user_id          String?        @db.ObjectId
+}
+
+model TemplateMessages {
+  id                    String   @id @default(auto()) @map("_id") @db.ObjectId
+  message_text_template String
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+  user                  User?    @relation(fields: [user_id], references: [id])
+  user_id                String?  @db.ObjectId
+}
+
+model Car {
+  id                     String   @id @default(auto()) @map("_id") @db.ObjectId
+  id_car                 String @unique
+  name                   String?
+  owner                  String?
+  price                  String?
+  status                 String?
+  condition              String?
+  mileage                String?
+  year                   Int?
+  engine                 String?
+  transmission           String?
+  owners                 String?
+  inspected              String?
+  plate                  String?
+  specifications         String?
+  safety                 String?
+  interior               String?
+  electronics            String?
+  additional_information String?
+  others                 String?
+  image                  String?
+  link                   String?
+  createdAt              DateTime? @default(now())
+  updatedAt              DateTime? @updatedAt
+
+  @@map("cars")
+}
