@@ -5,8 +5,11 @@ import { PrismaService } from "src/prisma/prisma.service";
 export class CarsService {
   constructor(private readonly prismaService: PrismaService) {}
 
-  async findAll() {
-    const cars = await this.prismaService.car.findMany();
+  async findAll(page: number, perPage: number = 12) {
+    const cars = await this.prismaService.car.findMany({
+      skip: page * perPage,
+      take: perPage,
+    });
 
     return cars;
   }
