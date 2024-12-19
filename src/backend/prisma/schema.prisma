@@ -41,7 +41,7 @@ model SendMessages {
   createdAt       DateTime       @default(now())
   updatedAt       DateTime       @updatedAt
   user            User?          @relation(fields: [user_id], references: [id])
-  user_id          String?        @db.ObjectId
+  user_id         String?        @db.ObjectId
 }
 
 model TemplateMessages {
@@ -50,34 +50,39 @@ model TemplateMessages {
   createdAt             DateTime @default(now())
   updatedAt             DateTime @updatedAt
   user                  User?    @relation(fields: [user_id], references: [id])
-  user_id                String?  @db.ObjectId
+  user_id               String?  @db.ObjectId
 }
 
 model Car {
-  id                     String   @id @default(auto()) @map("_id") @db.ObjectId
-  id_car                 String @unique
-  name                   String?
-  owner                  String?
-  price                  String?
-  status                 String?
-  condition              String?
-  mileage                String?
-  year                   Int?
-  engine                 String?
-  transmission           String?
-  owners                 String?
-  inspected              String?
-  plate                  String?
-  specifications         String?
-  safety                 String?
-  interior               String?
-  electronics            String?
-  additional_information String?
-  others                 String?
-  image                  String?
-  link                   String?
-  createdAt              DateTime? @default(now())
-  updatedAt              DateTime? @updatedAt
+  id             String    @id @default(auto()) @map("_id") @db.ObjectId
+  id_car         String    @unique
+  name           String
+  owners         String?
+  seller         String
+  price          Int
+  condition      String?
+  mileage        String
+  images         String[]
+  phone          String
+  engine         String
+  year           Int
+  gearbox        String
+  inspected      String?
+  driveType      String?
+  plate          String
+  power          String?
+  topSpeed       String?
+  acceleration   String?
+  numberOfPeople Int?
+  numberOfDoors  Int?
+  safety         String[]
+  interior       String[]
+  electronics    String[]
+  additionalInfo String?
+  others         String?
+  link           String?
+  createdAt      DateTime? @default(now())
+  updatedAt      DateTime? @updatedAt
 
   @@map("cars")
 }

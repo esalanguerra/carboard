@@ -1,0 +1,16 @@
+meta {
+  name: get cars by filter people and doors
+  type: http
+  seq: 5
+}
+
+get {
+  url: {{host}}/cars?numberOfPeople=5&numberOfDoors=4
+  body: none
+  auth: none
+}
+
+params:query {
+  numberOfPeople: 5
+  numberOfDoors: 4
+}
