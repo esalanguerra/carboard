@@ -18,6 +18,10 @@ async function bootstrap() {
     .addTag("cars")
     .build();
 
+  app.setGlobalPrefix("api", {
+    exclude: ["/"],
+  });
+
   const documentFactory = () => SwaggerModule.createDocument(app, config);
 
   SwaggerModule.setup("api/docs", app, documentFactory);
