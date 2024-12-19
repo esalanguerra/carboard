@@ -710,7 +710,7 @@ async function iniciarBot() {
           owners: proprietarios_carro,
           condition: condic_car,
           mileage: quilometragem_carro,
-          year: year ? parseInt(ano_carro.slice(0, 4)) : undefined,
+          year: ano_carro ? parseInt(ano_carro.slice(0, 4)) : undefined,
           engine: motor_carro,
           gearbox: cambio_carro,
           inspected: inspecionado_carro,
