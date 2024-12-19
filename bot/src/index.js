@@ -728,6 +728,7 @@ async function iniciarBot() {
           others: outros_carro,
           image: imagem_carro,
           phone: telefone,
+          link: link,
         }
 
         try {

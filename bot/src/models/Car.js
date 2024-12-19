@@ -3,8 +3,6 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const carSchema = new Schema({
-  createdAt: { type: Date, default: Date.now },
-  updatedAt: { type: Date, default: Date.now },
   id_car: { type: String, unique: true },
   seller: { type: String },
   name: { type: String },
@@ -30,6 +28,9 @@ const carSchema = new Schema({
   others: { type: String },
   image: { type: [String] },
   phone: { type: String },
+  createdAt: { type: Date, default: Date.now },
+  updatedAt: { type: Date, default: Date.now },
+  link: { type: String },
 });
 
 const Car = mongoose.model("Car", carSchema);
