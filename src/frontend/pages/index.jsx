@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import Layout from "../components/Layout";
 import { apiRequest } from "../lib/api";
+import withAuth from "../hoc/withAuth";
 
-export default function Home() {
+function Page() {
   const [cars, setCars] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -61,3 +62,5 @@ export default function Home() {
     </Layout>
   );
 }
+
+export default withAuth(Page);
