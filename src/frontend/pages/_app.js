@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Script from "next/script";
+import { AuthProvider } from "../contexts/AuthContext";
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -13,7 +14,9 @@ function MyApp({ Component, pageProps }) {
         />
         <link rel="stylesheet" href="/css/styles.css" />
       </Head>
-      <Component {...pageProps} />
+      <AuthProvider>
+        <Component {...pageProps} />
+      </AuthProvider>
       <Script
         src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"

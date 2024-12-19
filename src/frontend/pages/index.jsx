@@ -1,19 +1,52 @@
+import { useEffect, useState } from "react";
 import Layout from "../components/Layout";
 import { apiRequest } from "../lib/api";
-import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import { auth, onAuthStateChangedListener } from "../lib/firebase";
 
 export default function Home() {
   const [cars, setCars] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
-    apiRequest({ data: {}, method: "GET", url: "/cars", parameters: { page: 1, perPage: 12 } }).then((data) => {
-      if (Array.isArray(data)) {
-        setCars(data);
+    // Observa o estado de autenticação do usuário
+    const unsubscribe = onAuthStateChangedListener((user) => {
+      if (user) {
+        setIsAuthenticated(true);
+        setLoading(false); // Quando o usuário estiver autenticado, pare o carregamento
       } else {
-        console.log("Error", data);
+        setIsAuthenticated(false);
+        setLoading(false); // Quando o usuário não estiver autenticado, pare o carregamento
+        router.push("/signin"); // Redireciona para a página de login
       }
     });
+
+    // Limpa o ouvinte quando o componente for desmontado
+    return () => unsubscribe();
   }, []);
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      apiRequest({
+        data: {},
+        method: "GET",
+        url: "/cars",
+        parameters: { page: 1, perPage: 12 },
+      }).then((data) => {
+        if (Array.isArray(data)) {
+          setCars(data);
+        } else {
+          console.log("Error", data);
+        }
+      });
+    }
+  }, [isAuthenticated]);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <Layout>
