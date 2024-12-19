@@ -37,6 +37,8 @@ model SendMessages {
   id              String         @id @default(auto()) @map("_id") @db.ObjectId
   message_text    String
   whatsapp_number String
+  car_id          String?        @db.ObjectId
+  car             Car?           @relation(fields: [car_id], references: [id])
   status          MESSAGE_STATUS @default(PENDING)
   createdAt       DateTime       @default(now())
   updatedAt       DateTime       @updatedAt
@@ -54,8 +56,8 @@ model TemplateMessages {
 }
 
 model Car {
-  id             String    @id @default(auto()) @map("_id") @db.ObjectId
-  id_car         String    @unique
+  id             String         @id @default(auto()) @map("_id") @db.ObjectId
+  id_car         String         @unique
   name           String
   owners         String?
   seller         String
@@ -81,8 +83,9 @@ model Car {
   additionalInfo String?
   others         String?
   link           String?
-  createdAt      DateTime? @default(now())
-  updatedAt      DateTime? @updatedAt
+  messages       SendMessages[]
+  createdAt      DateTime?      @default(now())
+  updatedAt      DateTime?      @updatedAt
 
   @@map("cars")
 }

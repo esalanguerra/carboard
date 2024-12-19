@@ -15,7 +15,9 @@ export class MessagesService {
   }
 
   async findAll() {
-    return await this.prismaService.sendMessages.findMany();
+    return await this.prismaService.sendMessages.findMany({
+      include: { user: true, car: true },
+    });
   }
 
   async findOne(id: string) {

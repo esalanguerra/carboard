@@ -17,4 +17,7 @@ export class CreateMessageDto {
 
   @ApiProperty({ description: "User ID associated with the message", example: "user_123" })
   user_id: string;
+
+  @ApiPropertyOptional({ description: "Car ID associated with the message", example: "car_123" })
+  car_id: string;
 }
