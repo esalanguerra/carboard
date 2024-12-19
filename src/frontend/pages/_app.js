@@ -1,9 +1,10 @@
 import Head from "next/head";
 import Script from "next/script";
+import { AuthProvider } from "../contexts/AuthContext";
 
 function MyApp({ Component, pageProps }) {
   return (
-    <>
+    <AuthProvider>
       <Head>
         <link
           rel="stylesheet"
@@ -24,7 +25,7 @@ function MyApp({ Component, pageProps }) {
         integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
         crossorigin="anonymous"
       />
-    </>
+    </AuthProvider>
   );
 }
 
