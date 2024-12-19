@@ -6,5 +6,7 @@ export const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getA
 export const auth = getAuth(app);
 
 export const onAuthStateChangedListener = (callback) => {
-  onAuthStateChanged(auth, callback);
+  const unsubscribe = onAuthStateChanged(auth, callback);
+
+  return unsubscribe;
 };
