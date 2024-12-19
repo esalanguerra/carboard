@@ -72,7 +72,30 @@ export default function Page() {
     const encodedMessage = encodeURIComponent(message);
     const whatsappUrl = `https://api.whatsapp.com/send/?phone=${phone}&text=${encodedMessage}&type=phone_number&app_absent=0`;
 
+
+    const sendMessage = {
+      message_text: message,
+      whatsapp_number: phone,
+      car_id: car.id,
+    }
+
     window.open(whatsappUrl, "_blank");
+  };
+
+  const fetchPostSendMessage = async (data) => {
+    try {
+      const response = await apiRequest({
+        data: data,
+        method: "POST",
+        url: "/messages",
+      });
+
+      return response || null;
+    } catch (error) {
+      console.error("Error sending message:", error);
+
+      return null;
+    }
   };
 
   return (
