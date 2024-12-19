@@ -1,0 +1,15 @@
+meta {
+  name: get cars by filter
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{host}}/cars?transmission=Etuveto
+  body: none
+  auth: none
+}
+
+params:query {
+  transmission: Etuveto
+}
