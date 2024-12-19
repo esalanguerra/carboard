@@ -202,6 +202,8 @@ async function iniciarBot() {
           return element ? element.innerText : null;
         });
         preco_carro = removerEmojis(preco_carro);
+        preco_carro = preco_carro.replace("€ ", "");
+        preco_carro = preco_carro.replace(" ", "");
 
         let status_carro = await pegarXPATH(page, [
           '//*[@id="slideEffect"]/div[19]/div[1]/div[1]/div[4]/div[3]/div/div[2]/div[4]/div/div[2]',
@@ -719,14 +721,14 @@ async function iniciarBot() {
           power: power,
           topSpeed: topSpeed,
           acceleration: acceleration,
-          numberOfPeople: numberOfPeople,
-          numberOfDoors: numberOfDoors,
+          numberOfPeople: parseInt(numberOfPeople),
+          numberOfDoors: parseInt(numberOfDoors),
           safety: seguranca_carro,
           interior: interior_carro,
           electronics: eletronica_carro,
           additionalInfo: infor_adicionais_carro,
           others: outros_carro,
-          image: imagem_carro,
+          images: imagem_carro,
           phone: telefone,
           link: link,
         }
