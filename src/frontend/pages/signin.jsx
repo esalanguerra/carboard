@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Page() {
   return (
     <div className="main-wrapper">
@@ -25,7 +27,7 @@ export default function Page() {
                 </div>
                 <div className="account-footer">
                   <p>
-                    Don't have an account yet? <a href="/signup">Register</a>
+                    Don't have an account yet? <Link href="/signup">Register</Link>
                   </p>
                 </div>
               </form>

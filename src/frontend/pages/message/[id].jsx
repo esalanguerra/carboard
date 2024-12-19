@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { apiRequest } from "../../../../lib/api";
+import { apiRequest } from "../../lib/api";
 
 export default function Page() {
   const [car, setCar] = useState({});
