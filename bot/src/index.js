@@ -202,7 +202,8 @@ async function iniciarBot() {
           return element ? element.innerText : null;
         });
         preco_carro = removerEmojis(preco_carro);
-        preco_carro = preco_carro.replace("€ ", "");
+
+        preco_carro = preco_carro.replace(" €", "");
         preco_carro = preco_carro.replace(" ", "");
 
         let status_carro = await pegarXPATH(page, [
@@ -337,49 +338,47 @@ async function iniciarBot() {
 
         if (especificacoes_carro.includes("Teho,,, ")) {
           power = especificacoes_carro.split("Teho,,, ")[1].split(",")[0];
-        } else {
-          console.error("Potência não encontrada");
-        }
+        } 
 
         let topSpeed = null;
 
         if (especificacoes_carro.includes("Huippunopeus,,, ")) {
-          topSpeed = especificacoes_carro.split("Huippunopeus,,, ")[1].split(",")[0];
-        } else {
-          console.error("Velocidade máxima não encontrada");
-        }
+          topSpeed = especificacoes_carro
+            .split("Huippunopeus,,, ")[1]
+            .split(",")[0];
+        } 
 
         let acceleration = null;
 
         if (especificacoes_carro.includes("Kiihtyvyys (0-100),,, ")) {
-          acceleration = especificacoes_carro.split("Kiihtyvyys (0-100),,, ")[1].split(",")[0];
-        } else {
-          console.error("Aceleração não encontrada");
-        }
+          acceleration = especificacoes_carro
+            .split("Kiihtyvyys (0-100),,, ")[1]
+            .split(",")[0];
+        } 
 
         let numberOfPeople = null;
 
         if (especificacoes_carro.includes("Henkilömäärä,,, ")) {
-          numberOfPeople = especificacoes_carro.split("Henkilömäärä,,, ")[1].split(",")[0];
-        } else {
-          console.error("Número de pessoas não encontrado");
-        }
+          numberOfPeople = especificacoes_carro
+            .split("Henkilömäärä,,, ")[1]
+            .split(",")[0];
+        } 
 
         let numberOfDoors = null;
 
         if (especificacoes_carro.includes("Ovien lkm,,, ")) {
-          numberOfDoors = especificacoes_carro.split("Ovien lkm,,, ")[1].split(",")[0];
-        } else {
-          console.error("Número de portas não encontrado");
-        }
+          numberOfDoors = especificacoes_carro
+            .split("Ovien lkm,,, ")[1]
+            .split(",")[0];
+        } 
 
-        let meterReading
+        let meterReading;
 
         if (especificacoes_carro.includes("Mittarilukema,,, ")) {
-          meterReading = especificacoes_carro.split("Mittarilukema,,, ")[1].split(",")[0];
-        } else {
-          console.error("Leitura do medidor não encontrada");
-        }
+          meterReading = especificacoes_carro
+            .split("Mittarilukema,,, ")[1]
+            .split(",")[0];
+        } 
 
         let seguranca_carro = await pegarXPATH2(page, "Turvallisuus", [
           '//*[@id="slideEffect"]/div[22]/div[1]/div[1]/div[4]/div[12]',
@@ -694,7 +693,6 @@ async function iniciarBot() {
             return imagens;
           });
         } catch (error) {
-          console.error("Erro ao capturar as imagens:", error);
           imagem_carro = [];
         }
 
@@ -712,7 +710,7 @@ async function iniciarBot() {
           owners: proprietarios_carro,
           condition: condic_car,
           mileage: quilometragem_carro,
-          year: ano_carro,
+          year: year ? parseInt(ano_carro.slice(0, 4)) : undefined,
           engine: motor_carro,
           gearbox: cambio_carro,
           inspected: inspecionado_carro,
@@ -721,8 +719,8 @@ async function iniciarBot() {
           power: power,
           topSpeed: topSpeed,
           acceleration: acceleration,
-          numberOfPeople: parseInt(numberOfPeople),
-          numberOfDoors: parseInt(numberOfDoors),
+          numberOfPeople: numberOfPeople ? parseInt(numberOfPeople) : undefined,
+          numberOfDoors: numberOfDoors ? parseInt(numberOfDoors) : undefined,
           safety: seguranca_carro,
           interior: interior_carro,
           electronics: eletronica_carro,
@@ -731,14 +729,16 @@ async function iniciarBot() {
           images: imagem_carro,
           phone: telefone,
           link: link,
-        }
+        };
 
-        try {
-          await carSchema.create(carro);
+        if (!(await carSchema.exists({ id_car: id_carro }))) {
+          try {
+            await carSchema.create(carro);
 
-          console.log(`Carro ${id_carro} cadastrado com sucesso!`);
-        } catch (error) {
-          console.log('Carro já existente');
+            console.log(`Carro ${id_carro} adicionado com sucesso!`);
+          } catch (error) {
+            console.log(`Erro ao adicionar carro ${id_carro}!`, error);
+          }
         }
       }
     }
