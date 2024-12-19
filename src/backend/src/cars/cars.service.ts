@@ -1,5 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { PrismaService } from "src/prisma/prisma.service";
+import { HttpException, HttpStatus } from "@nestjs/common";
 
 @Injectable()
 export class CarsService {
@@ -71,22 +72,18 @@ export class CarsService {
       };
     }
 
-    const cars = await this.prismaService.car.findMany({
+    return this.prismaService.car.findMany({
       skip: (page - 1) * perPage,
       take: perPage,
       where: filters,
     });
-
-    return cars;
   }
 
   async findAll(page: number = 1, perPage = 10) {
-    const cars = await this.prismaService.car.findMany({
+    return this.prismaService.car.findMany({
       skip: (page - 1) * perPage,
       take: perPage,
     });
-
-    return cars;
   }
 
   async findOne(id: string) {
@@ -97,7 +94,7 @@ export class CarsService {
     });
 
     if (!car) {
-      throw new Error("Car not found");
+      throw new HttpException("Car not found", HttpStatus.NOT_FOUND);
     }
 
     return car;
