@@ -51,14 +51,7 @@ export default function Page() {
     }
   }, [selectedTemplate, nomeVendedor, nomeProduto]);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    const encodedMessage = encodeURIComponent(message);
-    const whatsappUrl = `https://api.whatsapp.com/send/?phone=${phone}&text=${encodedMessage}&type=phone_number&app_absent=0`;
-
-    window.open(whatsappUrl, "_blank");
-  };
+  
 
   return (
     <LayoutDefault>

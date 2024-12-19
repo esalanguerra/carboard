@@ -15,6 +15,9 @@ export class CarsController {
     @Query("page") page?: number,
     @Query("perPage") perPage?: number,
   ) {
+    page = page ? Number(page) : 1;
+    perPage = perPage ? Number(perPage) : 11;
+
     return this.carsService.findAll(page, perPage);
   }
 
