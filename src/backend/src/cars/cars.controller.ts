@@ -64,6 +64,12 @@ export class CarsController {
     );
   }
 
+  @ApiOperation({ summary: "Count the number of cars" })
+  @Get('count')
+  count() {
+    return this.carsService.count();
+  }
+
   @ApiOperation({ summary: "Find a car by its ID" })
   @ApiParam({ name: "id", type: String, description: "Car ID" })
   @Get(":id")

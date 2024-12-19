@@ -39,7 +39,19 @@ export class MessagesService {
     });
   }
 
-  async count(user_id: string, status?: MESSAGE_STATUS, date?: string, whatsapp_phone?: string) {
+  async count() {
+    return await this.prismaService.sendMessages.count();
+  }
+
+  async countByFilterStatus(status?: MESSAGE_STATUS) {
+    return await this.prismaService.sendMessages.count({
+      where: {
+        status: status,
+      }
+    })
+  }
+
+  async countByFilterWithUserId(user_id: string, status?: MESSAGE_STATUS, date?: string, whatsapp_phone?: string) {
     return await this.prismaService.sendMessages.count({
       where: {
         user_id: user_id,

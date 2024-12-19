@@ -23,6 +23,21 @@ export class MessagesController {
     return this.messagesService.findAll();
   }
 
+  @ApiOperation({ summary: 'Count messages based on filters on status' })
+  @ApiQuery({
+    name: 'status',
+    required: false,
+    enum: MESSAGE_STATUS,
+    description: 'Filter by message status',
+    example: MESSAGE_STATUS.SENT,
+  })
+  @Get('count/filter/status')
+  countByFilterStatus(
+    @Query('status') status?: MESSAGE_STATUS,
+  ) {
+    return this.messagesService.countByFilterStatus(status);
+  }
+
   @ApiOperation({ summary: 'Retrieve a single message by ID' })
   @ApiParam({ name: 'id', description: 'ID of the message', example: 'message_123' })
   @Get(':id')
@@ -30,7 +45,7 @@ export class MessagesController {
     return this.messagesService.findOne(id);
   }
 
-  @ApiOperation({ summary: 'Count messages based on filters' })
+  @ApiOperation({ summary: 'Count messages based on filters on user_id' })
   @ApiParam({ name: 'user_id', required: false, description: 'User ID (optional)', example: 'user_123' })
   @ApiQuery({
     name: 'status',
@@ -47,14 +62,20 @@ export class MessagesController {
     description: 'Filter by WhatsApp number',
     example: '+1234567890',
   })
-  @Get('count/:user_id?')
-  count(
+  @Get('count/filter/:user_id?')
+  countByFilterWithUserId(
     @Param('user_id') user_id?: string,
     @Query('status') status?: MESSAGE_STATUS,
     @Query('date') date?: string,
     @Query('whatsappNumber') whatsapp_phone?: string,
   ) {
-    return this.messagesService.count(user_id, status, date, whatsapp_phone);
+    return this.messagesService.countByFilterWithUserId(user_id, status, date, whatsapp_phone);
+  }
+
+  @ApiOperation({ summary: 'Count all messages' })
+  @Get('count')
+  async count() {
+    return this.messagesService.count();
   }
 
   @ApiOperation({ summary: 'Update a message by ID' })

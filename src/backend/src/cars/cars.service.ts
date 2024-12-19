@@ -99,4 +99,8 @@ export class CarsService {
 
     return car;
   }
+
+  async count() {
+    return this.prismaService.car.count();
+  }
 }
