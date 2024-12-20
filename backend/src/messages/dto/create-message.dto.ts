@@ -32,4 +32,10 @@ export class CreateMessageDto {
     example: 'template_123',
   })
   templateMessageId: string;
+
+  @ApiPropertyOptional({
+    description: 'Schedule ID associated with the message',
+    example: 'schedule_123',
+  })
+  scheduleId: string;
 }

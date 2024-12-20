@@ -7,4 +7,7 @@
 - [X] Carros
 - [X] Filtros de Carros
 - [X] Enviar Mensagens
+- [ ] Enviar Mensagem Whatsapp
+- [ ] Enviar Mensagem Whatsapp automatico com filtros
+- [ ] Processamento em Segundo Plano
 - [ ] Agendar Envio de Mensagem

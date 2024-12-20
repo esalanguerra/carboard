@@ -6,6 +6,7 @@ import { CarsModule } from './cars/cars.module';
 import { UsersModule } from './users/users.module';
 import { MessagesModule } from './messages/messages.module';
 import { TemplateMessagesModule } from './template-messages/template-messages.module';
+import { SchedulesModule } from './schedules/schedules.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { TemplateMessagesModule } from './template-messages/template-messages.mo
     UsersModule,
     MessagesModule,
     TemplateMessagesModule,
+    SchedulesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
