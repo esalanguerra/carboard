@@ -1,0 +1,15 @@
+meta {
+  name: get all cars by gearbox
+  type: http
+  seq: 11
+}
+
+get {
+  url: {{host}}/cars/filter?gearbox=Manuaali
+  body: none
+  auth: none
+}
+
+params:query {
+  gearbox: Manuaali
+}

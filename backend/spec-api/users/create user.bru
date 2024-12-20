@@ -1,0 +1,20 @@
+meta {
+  name: create user
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{host}}/users
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "subFirebase": "qp9ADqLIAQYuvg9fVBmjf1Embe23",
+    "fullName":"rodrigo roger",
+    "vat": "5858756786778785959",
+    "phoneNumber": "8758475845"
+  }
+}

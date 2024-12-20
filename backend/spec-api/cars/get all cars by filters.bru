@@ -1,0 +1,15 @@
+meta {
+  name: get all cars by filters
+  type: http
+  seq: 7
+}
+
+get {
+  url: {{host}}/cars/filter?name=Mercedes
+  body: none
+  auth: none
+}
+
+params:query {
+  name: Mercedes
+}

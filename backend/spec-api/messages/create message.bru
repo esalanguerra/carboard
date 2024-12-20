@@ -1,0 +1,21 @@
+meta {
+  name: create message
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{host}}/messages
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "messageText": "Olá me interessei pelo carro BMW 320, ainda esta disponivel?",
+    "whatsappNumber": "+54548384548844",
+    "userId": "6765c00a220fb6598f4bd3b0",
+    "carId": "6765c3643ce0b763c933e884",
+    "templateMessageId": "6765c0ee220fb6598f4bd3b1"
+  }
+}

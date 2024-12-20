@@ -1,0 +1,15 @@
+meta {
+  name: get all cars by mileage
+  type: http
+  seq: 9
+}
+
+get {
+  url: {{host}}/cars/filter?mileage=206800
+  body: none
+  auth: none
+}
+
+params:query {
+  mileage: 206800
+}

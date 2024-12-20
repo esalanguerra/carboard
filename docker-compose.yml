@@ -1,26 +1,15 @@
-volumes:
-  database-data:
-    driver: local
-
 networks:
   carboard-net:
     driver: bridge
 
-services:
-  database:
-    image: mongo:latest
-    restart: no
-    container_name: mongodb
-    ports:
-      - 27017:27017
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: admin
-      MONGO_INITDB_ROOT_PASSWORD: admin
-    volumes:
-      - database-data:/data/db
-    networks:
-      - carboard-net
+volumes:
+  database-data:
+    driver: local
 
+  redis-data:
+    driver: local
+
+services:
   mongo-express:
     image: mongo-express
     restart: no
@@ -29,9 +18,55 @@ services:
       - 8081:8081
     environment:
       ME_CONFIG_MONGODB_SERVER: database
-      ME_CONFIG_MONGODB_ADMINUSERNAME: admin
-      ME_CONFIG_MONGODB_ADMINPASSWORD: admin
-      ME_CONFIG_BASICAUTH_USERNAME: admin
-      ME_CONFIG_BASICAUTH_PASSWORD: admin
+      ME_CONFIG_MONGODB_PORT: 27017
+      ME_CONFIG_MONGODB_ADMINUSERNAME: cardboard
+      ME_CONFIG_MONGODB_ADMINPASSWORD: cardboard
+    networks:
+      - carboard-net
+    depends_on:
+      - database
+
+  database:
+    image: bitnami/mongodb:6.0.0
+    restart: no
+    container_name: database
+    ports:
+      - 27017:27017
+    environment:
+      MONGODB_ROOT_USER: cardboard
+      MONGODB_ROOT_PASSWORD: cardboard
+      MONGODB_DATABASE: cardboard
+    volumes:
+      - database-data:/data/db
+    networks:
+      - carboard-net
+
+  bull-board:
+    image: deadly0/bull-board:3.2.6
+    restart: no
+    container_name: bull-board
+    ports:
+      - 8000:3000
+    environment:
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      REDIS_PASSWORD: admin1234
+      REDIS_USE_TLS: 'false'
+      BULL_PREFIX: whatsapp
+    networks:
+      - carboard-net
+    depends_on:
+      - redis
+
+  redis:
+    image: bitnami/redis:6.2.16-debian-12-r3
+    restart: no
+    container_name: redis
+    ports:
+      - 6379:6379
+    environment:
+      REDIS_PASSWORD: admin1234
+    volumes:
+      - redis-data:/data
     networks:
       - carboard-net

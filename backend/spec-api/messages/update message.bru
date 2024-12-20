@@ -1,0 +1,17 @@
+meta {
+  name: update message
+  type: http
+  seq: 2
+}
+
+patch {
+  url: {{host}}/messages/6765c402e5139a5fc891df75
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "status": "SENT"
+  }
+}

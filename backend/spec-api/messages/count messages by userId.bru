@@ -1,0 +1,15 @@
+meta {
+  name: count messages by userId
+  type: http
+  seq: 4
+}
+
+get {
+  url: {{host}}/messages/count/filter?userId=6765c00a220fb6598f4bd3b0
+  body: none
+  auth: none
+}
+
+params:query {
+  userId: 6765c00a220fb6598f4bd3b0
+}

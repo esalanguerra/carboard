@@ -1,0 +1,18 @@
+meta {
+  name: create template message
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{host}}/template-messages
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "messageTextTemplate": "Olá me interessei pelo carro {carName}, ainda esta disponivel?",
+    "userId": "6765c00a220fb6598f4bd3b0"
+  }
+}

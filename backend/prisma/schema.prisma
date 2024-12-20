@@ -1,0 +1,113 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+enum MESSAGE_STATUS {
+  SENT
+  NOT_SENT
+  PENDING
+  CANCELED
+}
+
+enum USER_STATUS {
+  ACTIVE
+  DISABLED
+}
+
+model User {
+  id               String            @id @default(auto()) @map("_id") @db.ObjectId
+  subFirebase      String
+  fullName         String
+  vat              String            @unique
+  phoneNumber      String
+  messages         Message[]
+  templateMessages TemplateMessage[]
+  schedules        Schedule[]
+  status           USER_STATUS       @default(ACTIVE)
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+
+  @@map("users")
+}
+
+model Schedule {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  messageId String   @db.ObjectId
+  message   Message  @relation(fields: [messageId], references: [id])
+  filters   Json?
+  date      DateTime
+  userId    String?  @db.ObjectId
+  user      User?    @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("schedules")
+}
+
+model Message {
+  id                String           @id @default(auto()) @map("_id") @db.ObjectId
+  messageText       String
+  whatsappNumber    String
+  template          TemplateMessage? @relation(fields: [templateMessageId], references: [id])
+  carId             String?          @db.ObjectId
+  car               Car?             @relation(fields: [carId], references: [id])
+  status            MESSAGE_STATUS   @default(PENDING)
+  createdAt         DateTime         @default(now())
+  updatedAt         DateTime         @updatedAt
+  userId            String?          @db.ObjectId
+  user              User?            @relation(fields: [userId], references: [id])
+  schedules         Schedule[]
+  templateMessageId String?          @db.ObjectId
+
+  @@map("messages")
+}
+
+model TemplateMessage {
+  id                  String    @id @default(auto()) @map("_id") @db.ObjectId
+  messageTextTemplate String
+  createdAt           DateTime  @default(now())
+  updatedAt           DateTime  @updatedAt
+  userId              String?   @db.ObjectId
+  user                User?     @relation(fields: [userId], references: [id])
+  Message             Message[]
+
+  @@map("template_messages")
+}
+
+model Car {
+  id                    String    @id @default(auto()) @map("_id") @db.ObjectId
+  idCar                 Int       @unique
+  seller                String?
+  name                  String?
+  price                 Int?
+  owners                String?
+  condition             String?
+  mileage               Int?
+  year                  Int?
+  engine                String?
+  gearbox               String?
+  inspected             String?
+  driveType             String?
+  plate                 String?
+  safety                String?
+  espercifications      Json?
+  transmissionSystem    String?
+  inspection            String?
+  interior              String?
+  electronics           String?
+  additionalInformation String?
+  others                String?
+  images                String[]
+  phone                 String
+  link                  String
+  createdAt             DateTime? @default(now())
+  updatedAt             DateTime? @updatedAt
+  messages              Message[]
+
+  @@map("cars")
+}

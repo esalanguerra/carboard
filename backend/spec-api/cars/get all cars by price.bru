@@ -1,0 +1,15 @@
+meta {
+  name: get all cars by price
+  type: http
+  seq: 10
+}
+
+get {
+  url: {{host}}/cars/filter?price=3000
+  body: none
+  auth: none
+}
+
+params:query {
+  price: 3000
+}
