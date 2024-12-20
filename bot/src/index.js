@@ -372,7 +372,7 @@ async function iniciarBot() {
             .split(",")[0];
         } 
 
-        let meterReading;
+        let meterReading = null;
 
         if (especificacoes_carro.includes("Mittarilukema,,, ")) {
           meterReading = especificacoes_carro
