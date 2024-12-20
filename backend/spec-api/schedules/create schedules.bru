@@ -1,0 +1,22 @@
+meta {
+  name: create schedules
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{host}}/schedules
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "filters": {
+      "price": 3000,
+      "gearbox": "Manuaali"
+    },
+    "templateMessageId": "6765c0ee220fb6598f4bd3b1",
+    "userId": "6765c00a220fb6598f4bd3b0"
+  }
+}

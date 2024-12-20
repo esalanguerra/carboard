@@ -1,5 +1,6 @@
+import { SCHEDULE_STATUS } from '@prisma/client';
+
 export class CreateScheduleDto {
-  messageId: string;
   filters?: {
     name?: string;
     year?: number;
@@ -10,5 +11,6 @@ export class CreateScheduleDto {
     numberOfDoors?: number;
   };
   templateMessageId: string;
+  status?: SCHEDULE_STATUS;
   userId: string;
 }
