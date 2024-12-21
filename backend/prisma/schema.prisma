@@ -50,7 +50,7 @@ model Schedule {
   user              User?            @relation(fields: [userId], references: [id])
   createdAt         DateTime         @default(now())
   updatedAt         DateTime         @updatedAt
-  Message           Message[]
+  messages           Message[]
 
   @@map("schedules")
 }
@@ -81,8 +81,8 @@ model TemplateMessage {
   updatedAt           DateTime   @updatedAt
   userId              String?    @db.ObjectId
   user                User?      @relation(fields: [userId], references: [id])
-  Message             Message[]
-  Schedule            Schedule[]
+  messages            Message[]
+  schedules           Schedule[]
 
   @@map("template_messages")
 }

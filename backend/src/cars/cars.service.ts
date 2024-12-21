@@ -25,14 +25,6 @@ export class CarsService {
       numberOfDoors?: number;
     },
   ): Promise<Car[]> {
-    filters.name = filters.name ? String(filters.name) : null;
-    filters.year = filters.year ? Number(filters.year) : null;
-    filters.mileage = filters.mileage ? Number(filters.mileage) : null;
-    filters.price = filters.price ? Number(filters.price) : null;
-    filters.numberOfDoors = filters.numberOfDoors
-      ? Number(filters.numberOfDoors)
-      : null;
-
     const where: Prisma.CarWhereInput = {
       name: filters.name
         ? { contains: filters.name, mode: 'insensitive' }
@@ -46,13 +38,6 @@ export class CarsService {
       transmissionSystem: filters.transmissionSystem
         ? { equals: filters.transmissionSystem, mode: 'insensitive' }
         : undefined,
-      espercifications: {
-        equals: {
-          numberOfDoors: filters.numberOfDoors
-            ? filters.numberOfDoors
-            : undefined,
-        },
-      },
     };
 
     const cars = await this.prisma.car.findMany({
@@ -60,10 +45,6 @@ export class CarsService {
       take: perPage,
       skip: perPage * (page - 1),
     });
-
-    if (!cars.length) {
-      throw new HttpException('Cars not found', HttpStatus.NOT_FOUND);
-    }
 
     return cars;
   }

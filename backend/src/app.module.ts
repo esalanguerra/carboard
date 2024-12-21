@@ -7,10 +7,12 @@ import { UsersModule } from './users/users.module';
 import { MessagesModule } from './messages/messages.module';
 import { TemplateMessagesModule } from './template-messages/template-messages.module';
 import { SchedulesModule } from './schedules/schedules.module';
+import { TasksModule } from './tasks/tasks.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
+    TasksModule,
     CarsModule,
     UsersModule,
     MessagesModule,

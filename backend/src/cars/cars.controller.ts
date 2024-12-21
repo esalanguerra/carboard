@@ -55,21 +55,24 @@ export class CarsController {
     @Query('page') page = 1,
     @Query('perPage') perPage = 10,
     @Query('name') name?: string,
-    @Query('year') year?: number,
-    @Query('mileage') mileage?: number,
-    @Query('price') price?: number,
+    @Query('year') year?: string,
+    @Query('mileage') mileage?: string,
+    @Query('price') price?: string,
     @Query('gearbox') gearbox?: string,
     @Query('transmissionSystem') transmissionSystem?: string,
-    @Query('numberOfDoors') numberOfDoors?: number,
+    @Query('numberOfDoors') numberOfDoors?: string,
   ) {
-    return this.carsService.findAllFilter(page, perPage, {
+    page = page ? Number(page) : 1;
+    perPage = perPage ? Number(perPage) : 10;
+
+    return this.carsService.findAllFilter(Number(page), Number(perPage), {
       name,
-      year,
-      mileage,
-      price,
+      year: year ? Number(year) : undefined,
+      mileage: mileage ? Number(mileage) : undefined,
+      price: price ? Number(price) : undefined,
       gearbox,
       transmissionSystem,
-      numberOfDoors,
+      numberOfDoors: numberOfDoors ? Number(numberOfDoors) : undefined,
     });
   }
 
@@ -91,6 +94,9 @@ export class CarsController {
     @Query('page') page = 1,
     @Query('perPage') perPage = 10,
   ) {
+    page = page ? Number(page) : 1;
+    perPage = perPage ? Number(perPage) : 10;
+
     return this.carsService.findAllPagination(page, perPage);
   }
 
@@ -104,13 +110,6 @@ export class CarsController {
   @Get()
   findAll() {
     return this.carsService.findAll();
-  }
-
-  @ApiOperation({ summary: 'Find a car by its ID' })
-  @ApiParam({ name: 'id', type: String, description: 'Car ID' })
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.carsService.findOne(id);
   }
 
   @ApiOperation({ summary: 'Find a car by its unique ID' })
@@ -127,5 +126,12 @@ export class CarsController {
   @Get('id/:idCar/messages/count')
   countMessages(@Param('idCar') idCar: number) {
     return this.carsService.countMessages(idCar);
+  }
+
+  @ApiOperation({ summary: 'Find a car by its ID' })
+  @ApiParam({ name: 'id', type: String, description: 'Car ID' })
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    return this.carsService.findOne(id);
   }
 }

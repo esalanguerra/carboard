@@ -20,6 +20,7 @@ export class SchedulesService {
   async findOne(id: string) {
     return await this.prismaService.schedule.findUnique({
       where: { id },
+      include: { templateMessage: true, messages: true },
     });
   }
 
